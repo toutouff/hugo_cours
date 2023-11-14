@@ -8,12 +8,16 @@
     <language>en-us</language>
     <lastBuildDate>Tue, 14 Nov 2023 13:30:54 +0100</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My_first_post</title>
+      <title>Hugo &#43; github</title>
       <link>/posts/my_first_post/</link>
       <pubDate>Tue, 14 Nov 2023 13:30:54 +0100</pubDate>
       
       <guid>/posts/my_first_post/</guid>
-      <description>test title </description>
+      <description>first post in this first post i will explain what i learn about hugo and github pages
+hugo hugo is kind of the fusion between a site builder and a cms
+it create all the directory tree to publish easly your website
+$hugo new site name_of_site you can create content with
+$hugo new post name_of_post and all the layout can be done within markdown</description>
     </item>
     
   </channel>
