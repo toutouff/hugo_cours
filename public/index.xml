@@ -13,7 +13,8 @@
       <pubDate>Tue, 14 Nov 2023 15:32:55 +0100</pubDate>
       
       <guid>/posts/why_hugo/</guid>
-      <description>why Hugo Static Site Generator (SSG): Gohugo.io is a popular static site generator written in the Go programming language. It offers faster load times and improved SEO as compared to dynamically generated websites because it generates HTML pages at build time instead of generating them on-the-fly like dynamic sites. This results in lower server resources usage and higher performance. Easy Content Creation: Unlike content management systems such as WordPress, Joomla, etc.</description>
+      <description>why Hugo Static Site Generator (SSG): Gohugo.io is a popular static site generator written in the Go programming language. It offers faster load times and improved SEO as compared to dynamically generated websites because it generates HTML pages at build time instead of generating them on-the-fly like dynamic sites. This results in lower server resources usage and higher performance.
+Easy Content Creation: Unlike content management systems such as WordPress, Joomla, etc.</description>
     </item>
     
     <item>
