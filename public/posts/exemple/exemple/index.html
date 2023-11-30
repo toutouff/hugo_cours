@@ -5,9 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Exemple | Antonin Charpentier</title>
+<title>integration of Chess | Antonin Charpentier</title>
 <meta name="keywords" content="">
-<meta name="description" content=" ">
+<meta name="description" content=" Game PGN: ">
 <meta name="author" content="">
 <link rel="canonical" href="/posts/exemple/exemple/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
@@ -56,16 +56,16 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Exemple" />
-<meta property="og:description" content=" " />
+</noscript><meta property="og:title" content="integration of Chess" />
+<meta property="og:description" content=" Game PGN: " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/exemple/exemple/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-14T16:10:10+01:00" />
 <meta property="article:modified_time" content="2023-11-14T16:10:10+01:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Exemple"/>
-<meta name="twitter:description" content=" "/>
+<meta name="twitter:title" content="integration of Chess"/>
+<meta name="twitter:description" content=" Game PGN: "/>
 
 
 <script type="application/ld+json">
@@ -82,7 +82,7 @@
     {
       "@type": "ListItem",
       "position":  1 ,
-      "name": "Exemple",
+      "name": "integration of Chess",
       "item": "/posts/exemple/exemple/"
     }
   ]
@@ -92,14 +92,14 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Exemple",
-  "name": "Exemple",
-  "description": " ",
+  "headline": "integration of Chess",
+  "name": "integration of Chess",
+  "description": " Game PGN: ",
   "keywords": [
     
   ],
-  "articleBody": " ",
-  "wordCount" : "0",
+  "articleBody": " Game PGN: ",
+  "wordCount" : "2",
   "inLanguage": "en",
   "datePublished": "2023-11-14T16:10:10+01:00",
   "dateModified": "2023-11-14T16:10:10+01:00",
@@ -168,30 +168,233 @@
   <header class="post-header">
     
     <h1 class="post-title">
-      Exemple
+      integration of Chess
     </h1>
     <div class="post-meta"><span title='2023-11-14 16:10:10 +0100 CET'>November 14, 2023</span>
 
 </div>
   </header> 
   <div class="post-content"><link rel="stylesheet"
-      href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
-      integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU"
+      href="https://unpkg.com/@chrisoakman/chessboard2@0.5.0/dist/chessboard2.min.css"
+      integrity="sha384-47VeTDpmy4yT21gKPXQcLQYQZwlmz27gEH5NTrOmTk3G/SGvMyltclOW/Q8uE+sL"
       crossorigin="anonymous">
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2"
+<script src="https://unpkg.com/@chrisoakman/chessboard2@0.5.0/dist/chessboard2.min.js"
+        integrity="sha384-/KwQCjA1GWovZNV3QDVtvSMDzO4reGgarF/RqHipr7hIUElH3r5zNl9WEPPOBRIF"
         crossorigin="anonymous"></script>
 
-<script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
-        integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD"
-        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.12.1/chess.js"
+  integrity="sha384-8sJV/krC8iV2g7t0PolQxFVckDtxhfM5gNHNAFPG2ZS/bScudOjfsB8ewhG2xle8"
+  crossorigin="anonymous"></script>
 
-
-<div id="board1" style="width: 400px"></div>
+<div id="myBoard" style="width: 400px"></div>
+<p id="gameStatus"></p>
+<h4>Game PGN:</h4>
+<div id="gamePGN" style="font-family: monospace"></div>
 <script>
-  var board1 = Chessboard('board1', 'start')
+// This example uses the chess.js library:
+// https://github.com/jhlywa/chess.js
+
+// NOTE: the game object is separate from the board object
+// the game object:
+// - controls the state of the game
+// - understands how pieces move and what moves are legal
+// - knows who's turn it is
+// - en passant, castling, draw logic, etc
+const game = new Chess()
+
+// the board object is "dumb":
+// - shows the current position from the game
+// - handles input events from users
+const boardConfig = {
+  draggable: true,
+  onDragStart,
+  onTouchSquare,
+  onDrop,
+  onSnapEnd,
+  position: game.fen(),
+  touchMove: true
+}
+const board = Chessboard2('myBoard', boardConfig)
+
+updateStatus()
+
+let pendingMove = null
+
+// There are 5 outcomes from this action:
+// - start a pending move
+// - clear a pending move
+// - clear a pending move AND start a different pending move
+// - make a move (ie: complete their pending move)
+// - do nothing
+function onTouchSquare (square, piece, boardInfo) {
+  // ask chess.js what legal moves are available from this square
+  const legalMoves = game.moves({ square, verbose: true })
+
+  // Option 1: start a pending move
+  if (!pendingMove && legalMoves.length > 0) {
+    pendingMove = square
+
+    // add circles showing where the legal moves are for this piece
+    legalMoves.forEach(move => {
+      board.addCircle(move.to)
+    })
+
+  // Option 2: clear a pending move if the user selects the same square twice
+  } else if (pendingMove && pendingMove === square) {
+    pendingMove = null
+    board.clearCircles()
+
+  // Option 3: clear a pending move and start a new pending move
+  } else if (pendingMove) {
+    // ask chess.js to make a move
+    const moveResult = game.move({
+      from: pendingMove,
+      to: square,
+      promotion: 'q' // always promote to a Queen for example simplicity
+    })
+
+    // was this a legal move?
+    if (moveResult) {
+      // clear circles on the board
+      board.clearCircles()
+
+      // update to the new position
+      board.position(game.fen()).then(() => {
+        updatePGN()
+        updateStatus()
+
+        // wait a smidge, then make a random move for Black
+        window.setTimeout(makeRandomMove, 250)
+      })
+
+    // if the move was not legal, then start a new pendingMove from this square
+    } else if (piece) {
+      pendingMove = square
+
+      // remove any previous circles
+      board.clearCircles()
+
+      // add circles showing where the legal moves are for this piece
+      legalMoves.forEach(m => {
+        board.addCircle(m.to)
+      })
+
+    // else clear pendingMove
+    } else {
+      pendingMove = null
+      board.clearCircles()
+    }
+  }
+}
+
+function updateStatus () {
+  let statusHTML = ''
+  const whosTurn = game.turn() === 'w' ? 'White' : 'Black'
+
+  if (!game.game_over()) {
+    if (game.in_check()) statusHTML = whosTurn + ' is in check! '
+    statusHTML = statusHTML + whosTurn + ' to move.'
+  } else if (game.in_checkmate() && game.turn() === 'w') {
+    statusHTML = 'Game over: white is in checkmate. Black wins!'
+  } else if (game.in_checkmate() && game.turn() === 'b') {
+    statusHTML = 'Game over: black is in checkmate. White wins!'
+  } else if (game.in_stalemate() && game.turn() === 'w') {
+    statusHTML = 'Game is drawn. White is stalemated.'
+  } else if (game.in_stalemate() && game.turn() === 'b') {
+    statusHTML = 'Game is drawn. Black is stalemated.'
+  } else if (game.in_threefold_repetition()) {
+    statusHTML = 'Game is drawn by threefold repetition rule.'
+  } else if (game.insufficient_material()) {
+    statusHTML = 'Game is drawn by insufficient material.'
+  } else if (game.in_draw()) {
+    statusHTML = 'Game is drawn by fifty-move rule.'
+  }
+
+  document.getElementById('gameStatus').innerHTML = statusHTML
+}
+
+function updatePGN () {
+  const pgnEl = document.getElementById('gamePGN')
+  pgnEl.innerHTML = game.pgn({ max_width: 5, newline_char: '<br />' })
+}
+
+function onDragStart (dragStartEvt) {
+  // do not pick up pieces if the game is over
+  if (game.game_over()) return false
+
+  // only pick up pieces for White
+  if (!isWhitePiece(dragStartEvt.piece)) return false
+
+  // what moves are available to White from this square?
+  const legalMoves = game.moves({
+    square: dragStartEvt.square,
+    verbose: true
+  })
+
+  // do nothing if there are no legal moves
+  if (legalMoves.length === 0) return false
+
+  // place Circles on the possible target squares
+  legalMoves.forEach((move) => {
+    board.addCircle(move.to)
+  })
+}
+
+function isWhitePiece (piece) { return /^w/.test(piece) }
+
+function makeRandomMove () {
+  const possibleMoves = game.moves()
+
+  // game over
+  if (possibleMoves.length === 0) return
+
+  const randomIdx = Math.floor(Math.random() * possibleMoves.length)
+  game.move(possibleMoves[randomIdx])
+  board.position(game.fen(), (_positionInfo) => {
+    updateStatus()
+    updatePGN()
+  })
+}
+
+function onDrop (dropEvt) {
+  // see if the move is legal
+  const move = game.move({
+    from: dropEvt.source,
+    to: dropEvt.target,
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+  })
+
+  // remove all Circles from the board
+  board.clearCircles()
+
+  // the move was legal
+  if (move) {
+    // reset the pending move
+    pendingMove = null
+
+    // update the board position
+    board.fen(game.fen(), () => {
+      updateStatus()
+      updatePGN()
+
+      // make a random legal move for black
+      window.setTimeout(makeRandomMove, 250)
+    })
+  } else {
+    // reset the pending move
+    pendingMove = null
+
+    // return the piece to the source square if the move was illegal
+    return 'snapback'
+  }
+}
+
+// update the board position after the piece snap
+// for castling, en passant, pawn promotion
+function onSnapEnd () {
+  board.position(game.fen())
+}
+
 
 </script>
 
