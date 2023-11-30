@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Antonin Charpentier</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Nov 2023 15:32:55 +0100</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Nov 2023 16:10:10 +0100</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Exemple</title>
+      <link>/posts/exemple/exemple/</link>
+      <pubDate>Tue, 14 Nov 2023 16:10:10 +0100</pubDate>
+      
+      <guid>/posts/exemple/exemple/</guid>
+      <description> </description>
+    </item>
+    
     <item>
       <title>Why_hugo</title>
       <link>/posts/why_hugo/</link>
